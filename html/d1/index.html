@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="icon" href="../download.jpeg">
+</head>
+<style>
+    body{
+        background-color: #212121;
+        color: white;
+    }
+    a{
+        /* text-decoration: none; */
+        color: white;
+    }
+   
+    .skip:focus {
+        position: static;
+        width: auto;
+        height: auto;
+    }
+</style>
+<body>
+    
+    <header>
+        <a href="#main" class="skip">skip to main content</a>
+        <nav>
+            <dl>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="./about.html">about</a></li>
+                    <li><a href="./contact.html">contact</a></li>
+                </ul>
+            </dl>
+        </nav>
+    </header>
+    <hr>
+    <main id="main">
+        <section id="Home">
+            <h1>Ravi</h1>
+            <h3>Mern stack developer</h3>
+        </section>
+        <section id="profile">
+            <h2>profile</h2>
+            <figure>
+                <img src="../download.jpeg" alt="profile pic" width="50">
+                <figcaption>profile img</figcaption>
+            </figure>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut corporis culpa odio illum quidem assumenda, iste in voluptatibus necessitatibus nemo esse explicabo. Perspiciatis non velit porro quia aut temporibus architecto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellendus perferendis ex architecto itaque iusto excepturi, explicabo facere ullam molestiae ducimus officia atque assumenda adipisci libero officiis soluta amet eos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus veritatis aperiam consequatur, doloribus molestiae voluptatum minima! Ipsa provident porro eum similique a neque, excepturi architecto quidem officiis ut reiciendis impedit.</p>
+        </section>
+        <hr>
+        <section id="project">
+            <h2>Projects</h2>
+            <dl>
+                <dt>E-commerce:</dt>
+                <ul>
+                    <li>build an <b>ecommerce</b> web app for buy an premium perfume online</li>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero minima adipisci uuas?</li>
+                    <li><b>authenticaion and authorization</b> user can login using email and password </li>
+                    <li><b>role based access controle</b> manage user and admin role</li>
+                    <li> <b>claude image management </b> image handle using claudinary </li>
+                    <li><b>state management</b> proper state management using context api</li>
+                    <li><b>rest api</b>secure rest api to manage state less data</li>
+                </ul>
+            </dl>
+            <dl>
+                <dt>Project management:</dt>
+                <ul>
+                    <li><b>real-time</b> project management platform for Professionals</li>
+                    <li><b>state management</b> proper state management using redux library</li>
+                    <li><b>socket implementation</b>socket io implementation for real time data communicaion</li>
+                    <li>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem quisquam suscipit assumenda </li>
+                    <li><b>database management</b> use postgress sql to manage user task and data</li>
+                    <li><b>authenticaion and authorization</b>user authenticaion session management and role management</li>
+                </ul>
+            </dl>
+        </section>
+            <hr>
+        <section id="slils">
+            <h2>tech skills</h2>
+            <dl>
+                <dt>skills:</dt>
+                <ul>
+                    <li>html</li>
+                    <li>css</li>
+                    <li>javascript</li>
+                    <li>node js</li>
+                    <li>react.js</li>
+                    <li>mongodb</li>
+                    <li>nosql</li>
+                    <li>tailwindcss</li>
+
+                </ul>
+            </dl>
+        </section>
+        <hr>
+        <section>
+            <h2>videos</h2>
+            <div class="vid-containr">
+                <video  controls poster="../d2/poster.jpeg" width="300" height="250">
+                    <source  src="../d2/movie.mp4" type="video/mp4">
+                    <track label="english" kind="subtitles" srclang="en" src="./text.vtt" default></track>
+                    <!-- <caption>video example</caption> -->
+                     your browser does not support this video
+                </video>
+                <p>example video</p>
+            </div>
+            <div class="audio-container">
+                <audio controls>
+                    <source src="../d2//horse (1).ogg" type="audio/ogg">
+                    your browser does not support audio tag
+                </audio>
+                <p>audio example </p>
+            </div>
+            <div class="youtube-container">
+                <iframe src="https://www.youtube.com/embed/cuf1H1bC5g0?si=KzTaAZqDrmyKAsXH" title="W3Schools Free Online Web Tutorials" frameborder="0" allow="accelerometer; autoplay; clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" height="240" width="320"></iframe>
+                <p>youtube video ex</p>
+            </div>
+        </section>
+    </main>
+    <hr>
+     <footer>
+        <p>&copy; <span id="year">2006</span> Your Company Name. All rights reserved.</p>
+        <p>
+            <a href="/privacy">Privacy Policy</a> | 
+            <a href="/terms">Terms of Service</a>
+        </p>
+    </footer>
+    
+</body>
+</html>
