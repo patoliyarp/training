@@ -1,0 +1,28 @@
+1. ls
+Displays files and folders in a directory.
+2. pwd
+cd – Change to another directory location
+ls – List directory contents
+cp – Copy a file or directory to another location
+pwd – Print the current working directory
+info – The GNU alternative to man
+man – The standard unix documentation system
+mkdir – Make a directory
+mv – Move or rename a file or directory
+rmdir – Delete an empty directory
+touch – Create a new file or update its modification time
+rm – Delete a file or directory tree
+wc - print newline, word, and byte counts for each file
+chgrp – Change the group of a file or directory
+chmod – Change the permissions of a file or directory
+chown – Change the owner of a file or directory 
+echo – display line of text
+cat – Concatenate files to standard output 
+head – Output the first parts of a file
+tail - Output the last parts of a file
+cut – Remove sections from each line of a file or
+standard input
+paste - merge lines of files
+diff – Compare two text files line by line 
+sort - sort lines of text files 
+sort - sort lines of text files 
