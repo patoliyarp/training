@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact</title>
+    <style>
+      
+        body{
+            background-color: black;
+            color: white;
+            position: relative;
+            height: 100vh;
+        }
+        a{
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+
+     <header>
+        <nav>
+            <a href="./index.html">Home</a> |
+            <a href="./about.html">About</a> |
+            <a href="./contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+
+        
+            <h1>Contact Us</h1>
+            <p>Please fill out the form below to get in touch with us.</p>
+            <form action="method" autocomplete="on">
+        
+            <!-- input text  -->
+
+            <div>
+                <label for="name">name</label>
+                <input name="fname"  type="text" id="name" minlength="2" maxlength="5" placeholder="please enter name" aria-describedby="#name-info" required>
+                <div id="name-info">please enter valid name</div>
+            </div>
+        
+            <!-- input email  -->
+            <div>
+                <label for="email">email</label>
+                <input type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" id="email" placeholder="please enter email" aria-describedby="email-info" required>
+                <div id="email-info">please enter the email address</div>
+            </div>
+        
+            <!-- input password  -->
+            <div>
+                <label for="password">password</label>
+                <input type="password" id="password" placeholder="please enter password" minlength="8" required>
+            </div>
+
+            <div>
+                <label for="cpassword">confirm password</label>
+                <input type="password" minlength="8" id="cpassword" placeholder="please enter confirm password" required>
+            </div>
+            <!-- input number   -->
+            <div>
+                <label for="number">number</label>
+                <input type="tel" inputmode="numeric" pattern="[0-9]{10}" id="number" placeholder="enter mobile number" required>
+            </div>
+            <!-- choice inputs  -->
+        
+            <div>
+                gender:
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">male</label>
+                <input type="radio" name="gender" id="female" required> 
+                <label for="female">female</label>
+            </div>
+        
+            <!-- checkbox menu  -->
+            <div>
+                <input type="checkbox" name="term" id="term" required>
+                <label for="term">i accept the term and condition</label>
+                <!-- sports:
+                <input type="checkbox" name="cricket" id="cricket" value="cricket">
+                <label for="cricket">i like cricket</label>
+                <input type="checkbox" name="tennis" id="tennis" value="tennis">
+                <label for="tennis">i like tennis</label>
+                <input type="checkbox" name="hockey" id="hockey" value="hockey">
+                <label for="hockey">i like hockey</label> -->
+            </div>
+            <button> submit</button>
+        </form>
+
+        <section class="contact-details-section">
+            <h2>Our Details</h2>
+            <address>
+                <p>123 Company St, City, Country</p>
+                <p>Phone: <a href="tel:+1234567890">+123 456 7890</a></p>
+                <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
+            </address>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year">2006</span> Your Company Name. All rights reserved.</p>
+        <p>
+            <a href="/privacy">Privacy Policy</a> | 
+            <a href="/terms">Terms of Service</a>
+        </p>
+    </footer>
+
+    
+</div>
+</body>
+</html>
