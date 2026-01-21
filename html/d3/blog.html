@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Blog Post Example</title>
+    <meta name="description" content="A comprehensive example of a modern blog page incorporating advanced HTML and SEO features.">
+    <style>
+        body{
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <!-- Preload critical CSS/JS for faster loading -->
+    <!-- <link rel="preload" href="styles.css" as="style"> -->
+    <!-- <link rel="preload" href="script.js" as="script"> -->
+    <!-- <link rel="stylesheet" href="styles.css">  -->
+    
+    <!-- canonical Link -->
+    <link rel="canonical" href="https://localhost:5500/training/html/d3/blog.html">
+
+    <!-- meta data for og tags-->
+    <meta property="og:title" content="Modern Blog Post Example">
+    <meta property="og:description" content="A comprehensive example of a modern blog page incorporating advanced HTML and SEO features.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://localhost:5500/training/html/d3/blog.html">
+    <meta property="og:image" content="https://localhost:5500/training/html/download.jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="628">
+
+    <!-- metadata for twitter card-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@blogpost">
+    <meta name="twitter:creator" content="@rpblog">
+    <meta name="twitter:title" content="Modern Blog Post Example">
+    <meta name="twitter:description" content="A comprehensive example of a modern blog page incorporating advanced HTML and SEO features.">
+    <meta name="twitter:image" content="https://localhost:5500/training/html/download.jpeg">
+
+    <!-- json ld - script for understand page -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.yourwebsite.com",
+          "name": "blogpost",
+          "url": "https://localhost:5500/training/html/d3/blog.html",
+          "logo": "https://localhost:5500/training/html/download.jpeg"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Modern Blog Post Example",
+          "description": "A comprehensive example of a modern blog page.",
+          "image": {
+            "@type": "ImageObject",
+            "url": https://localhost:5500/training/html/download.jpeg",
+            "width": 1200,
+            "height": 628
+          },
+          "datePublished": "2024-01-15T08:00:00+08:00",
+          "author": {
+            "@type": "Person",
+            "name": "john wick"
+          },
+          "publisher": {
+            "@id": "https://localhost:5500/training/html/d3/blog.html"
+          },
+          "mainEntityOfPage": "https://localhost:5500/training/html/d3/blog.html"
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>A Blog Post </h1>
+    </header>
+
+    <main>
+        <!-- responsive image -->
+        <section>
+            <h2>responsive image</h2>
+            <picture aria-label="Responsive Banner" >
+                <source media="(min-width :1000px)" srcset="https://picsum.photos/700">
+                <source
+                  media="(min-width:500px)"
+                  srcset="https://picsum.photos/500"
+                />
+                <source
+                  media="(min-width:300px)"
+                  srcset="https://picsum.photos/300"
+                />
+                <img
+                  src="https://picsum.photos/300"
+                  alt="random picsum pic"
+                  loading="lazy"
+                />
+            </picture>
+        </section>
+
+        <article>
+            <h2>Article Content</h2>
+            <p>This is the main content of the blog post. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odit id harum amet hic totam ullam architecto, expedita tempore ipsum modi mollitia, velit placeat quasi unde eos minima perspiciatis vero!</p>
+
+            <!-- share button using svg -->
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"            fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+                    <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/>
+                </svg>
+                share
+            </button>
+            
+           
+         
+             <!-- canvas tag -->
+            <section aria-label="read more canvas">
+                <canvas id="mycanvas" width="120" height="40" style="border: 1px solid white;">
+                     your browser does not support canvas
+                </canvas>
+            </section>
+
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Your Website</p>
+    </footer>
+    <script>
+        const canvas=document.getElementById("mycanvas");
+        const ctx=canvas.getContext("2d");
+
+             // Draw background shape
+               const badge = {
+                width: 120,
+                height: 40,
+                x: canvas.width-120,
+                y: canvas.height - 40,
+                };
+
+                ctx.fillStyle = "#2563eb";
+                ctx.fillRect(badge.x, badge.y, badge.width, badge.height);
+
+
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 14px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('READ MORE', 55, 20);
+              
+    </script>
+  
+</body>
+</html>
