@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact</title>
+    <style>
+       
+        body{
+            background-color: black;
+            color: white;
+        }
+        a{
+        /* text-decoration: none; */
+        color: white;
+    }
+    </style>
+</head>
+<body>
+
+    <header>
+         <nav>
+            <dl>
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about.html">about</a></li>
+                    <li><a href="./contact.html">contact</a></li>
+                    <li><a href="./blog.html">blog</a></li>
+                </ul>
+            </dl>
+        </nav>
+        <hr>
+       
+    </header>
+    <div class="container">
+        
+        <h1>Contact Us</h1>
+        <p>Please fill out the form below to get in touch with us.</p>
+    <form  autocomplete="on">
+        
+        <!-- input text  -->
+
+        <div>
+            <label for="name">name</label>
+            <input name="fname"  type="text" id="name" minlength="2" maxlength="5" placeholder="please enter name" aria-describedby="#name-info" required>
+            <div id="name-info">please enter valid name</div>
+        </div>
+        
+        <!-- input email  -->
+        <div>
+            <label for="email">email</label>
+            <input type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" id="email" placeholder="please enter email" aria-describedby="email-info" required>
+            <div id="email-info">please enter the email address</div>
+        </div>
+        
+        <!-- input password  -->
+        <div>
+            <label for="password">password</label>
+            <input type="password" id="password" placeholder="please enter password" minlength="8" required>
+        </div>
+
+         <div>
+            <label for="cpassword">confirm password</label>
+            <input type="password" minlength="8" id="cpassword" placeholder="please enter confirm password" required>
+        </div>
+        <!-- input number   -->
+        <div>
+            <label for="number">number</label>
+            <input type="tel" inputmode="numeric" pattern="[0-9]{10}" id="number" placeholder="enter mobile number" required>
+        </div>
+        <!-- choice inputs  -->
+        
+        <div>
+            gender:
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male">male</label>
+            <input type="radio" name="gender" id="female" required> 
+            <label for="female">female</label>
+        </div>
+        
+        <!-- checkbox menu  -->
+        <div>
+            <input type="checkbox" name="term" id="term" required>
+            <label for="term">i accept the term and condition</label>
+            <!-- sports:
+            <input type="checkbox" name="cricket" id="cricket" value="cricket">
+            <label for="cricket">i like cricket</label>
+            <input type="checkbox" name="tennis" id="tennis" value="tennis">
+            <label for="tennis">i like tennis</label>
+            <input type="checkbox" name="hockey" id="hockey" value="hockey">
+            <label for="hockey">i like hockey</label> -->
+        </div>
+        <button> submit</button>
+    </form>
+</div>
+</body>
+</html>
