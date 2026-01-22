@@ -1,0 +1,153 @@
+/* --- Global Resets & Base Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+section {
+    padding: 40px 5%;
+    margin-bottom: 20px;
+}
+
+h1, h2 {
+    margin-bottom: 15px;
+}
+
+.cta-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    /* Hover Animation Setup */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* --- Nav Bar (Logo Left, Menu Right) --- */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Pushes logo and links to opposite ends */
+    align-items: center; /* Vertical alignment */
+    background: #fff;
+    padding: 10px 5%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.nav-links a {
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+/* --- Hero Section (Vertical & Horizontal Alignment) --- */
+#hero {
+    background-color: #e9ecef;
+    min-height: 50vh; /* Takes at least half the viewport height */
+    /* Flexbox centering: */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center;
+}
+
+/* --- Features Section (Horizontal Cards) --- */
+.feature-container {
+    display: flex;
+    justify-content: space-around; /* Distributes space evenly */
+    gap: 20px;
+     /* Space between cards */
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    flex: 1; /* Allows cards to grow and share space equally */
+    text-align: center;
+}
+
+/* --- Testimonials & Footer Styles --- */
+#testimonials {
+    background-color: #007bff;
+    color: white;
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+/* =======================================
+   RESPONSIVE DESIGN: MEDIA QUERIES
+   ======================================= */
+
+/* 1. Tablet View (min-width 600px) */
+@media (min-width: 600px) {
+    /* Features cards remain side-by-side */
+    .feature-container {
+        flex-direction: row; 
+    }
+}
+
+/* 2. Desktop View (min-width 992px) */
+@media (min-width: 992px) {
+    /* Adjust overall padding for wider screens */
+    section, .navbar {
+        padding: 40px 10%;
+    }
+}
+
+/* 3. Mobile View (max-width 599px) */
+@media (max-width: 599px) {
+    /* Stack feature cards vertically on mobile */
+    .feature-container {
+        flex-direction: column;
+    }
+    
+    /* Collapse Nav Menu on Mobile (stacking links) */
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .nav-links a {
+        display: block; /* Make links take full width */
+        margin: 10px 0 0 0;
+    }
+}
