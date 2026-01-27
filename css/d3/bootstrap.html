@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://getbootstrap.com/docs/5.3/assets/css/docs.css"
+      rel="stylesheet"
+    />
+    <title>Bootstrap Example</title>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    ></script>
+  </head>
+
+  <body class="m-0 border-0 bd-example m-0 border-0">
+    <!-- header section  -->
+    <nav class="navbar navbar-expand-md p-3" style="background-color: bisque">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Bootstrap </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-4">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                More
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Something</a></li>
+                <li><a class="dropdown-item" href="#">Another Something</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- main hero section  -->
+    <main>
+      <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            class="active"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item">
+            <img
+              src="../assets/img2.jpg"
+              class="d-block w-100"
+              alt="slider image"
+            />
+          </div>
+          <div class="carousel-item active">
+            <img
+              src="../assets/slide2.jpg"
+              class="d-block w-100"
+              alt="slider image 2"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="../assets/img1.jpg"
+              class="d-block w-100"
+              alt="slider image 3"
+            />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </main>
+
+    <!-- get quote section  -->
+    <section>
+      <div class="p-4 text-center">
+        <h2 class="mb-3">Quote of the day</h2>
+        <button
+          type="button"
+          class="btn text-light"
+          style="background-color: rgb(104, 66, 15)"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Get a Quote
+        </button>
+      </div>
+    </section>
+
+    <!-- modal section for get quote  -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum totam
+            aut maiores similique sint ut sapiente mollitia necessitatibus
+            reiciendis inventore ea vero iste quaerat, animi dolore magni,
+            voluptatibus voluptas temporibus?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- services sections  -->
+
+    <section id="services">
+      <div class="container my-4">
+        <h2 class="text-center">Our services</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+            <div class="card">
+              <img src="../assets/card1.jpg" alt="user img" />
+              <div class="card-body">
+                <h5 class="card-title">Title</h5>
+                <p class="card-text">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Reprehenderit, illo!
+                </p>
+                <a
+                  href="#"
+                  class="btn text-light"
+                  style="background-color: rgb(104, 66, 15)"
+                  >read more</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img src="../assets/card2.jpg" alt="user img" />
+              <div class="card-body">
+                <h5 class="card-title">Title</h5>
+                <p class="card-text">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Reprehenderit, illo!
+                </p>
+                <a
+                  href="#"
+                  class="btn text-light"
+                  style="background-color: rgb(104, 66, 15)"
+                  >read more</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img src="../assets/card3.jpg" alt="user img" />
+              <div class="card-body">
+                <h5 class="card-title">Title</h5>
+                <p class="card-text">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Reprehenderit, illo!
+                </p>
+                <a
+                  href="#"
+                  class="btn text-light"
+                  style="background-color: rgb(104, 66, 15)"
+                  >read more</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- contact us section  -->
+
+    <section class="my-4 container">
+      <div class="text-center">
+        <h2>Contact us</h2>
+        <p>we will respond you within 24 hours</p>
+      </div>
+      <form
+        class="row justify-content-center g-3 needs-validation was-validated mx-auto"
+      >
+        <div class="col-md-7">
+          <label for="fullname" class="form-label">First name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="fullname"
+            value="Mark"
+            required
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <br />
+        <div class="col-md-7">
+          <label for="email" class="form-label">Email</label>
+          <div class="input-group has-validation">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              aria-describedby="inputGroupPrepend"
+              required
+            />
+            <div class="invalid-feedback">Please enter email.</div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <label for="message" class="form-label">message</label>
+          <textarea
+            name="message"
+            id="message"
+            class="form-control"
+            required
+          ></textarea>
+          <div class="invalid-feedback">Please provide a message.</div>
+        </div>
+
+        <div class="col-7">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+      </form>
+    </section>
+
+    <footer
+      style="
+        height: 90px;
+        background-color: rgb(104, 66, 15);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <p>&copy; 2026 & all right reserved</p>
+    </footer>
+  </body>
+</html>

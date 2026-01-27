@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./output.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
+      type="module"
+    ></script>
+    <title>Dashboard</title>
+  </head>
+  <body class="flex">
+    <!-- side bar  -->
+    <aside
+      class="bg-white dark:bg-gray-900 h-screen w-64 border-r border-gray-400 fixed top-0 left-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-30"
+    >
+      <div
+        class="h-20 shadow-lg flex justify-center items-center dark:bg-gray-800 dark:text-white"
+      >
+        <h2 class="text-xl font-semibold text-center">My dashboard</h2>
+      </div>
+      <div class="dark:text-white text-center p-5">
+        <ul class="">
+          <li class="p-3 text-lg font-medium"><a href="#">Home</a></li>
+          <li class="p-3 text-lg font-medium"><a href="#">resume</a></li>
+          <li class="p-3 text-lg font-medium"><a href="#">company</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="flex-1 md:pl-64 transition-all duration-300 dark:bg-gray-900">
+      <!-- header sections  -->
+      <header
+        class="h-20 shadow-lg flex justify-between px-4 items-center bg-white dark:bg-gray-800 dark:text-white sticky top-0 z-10"
+      >
+        <!-- header logo  -->
+        <div class="text-xl font-semibold">
+          <h2>Dashboard</h2>
+        </div>
+
+        <!-- header navigation section  -->
+        <nav class="flex gap-3">
+          <!-- <div class="input"> -->
+          <input
+            type="text"
+            id="search"
+            class="hidden rounded-lg dark:bg-gray-800 sm:inline bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand w-full px-1 py-1 shadow-xs placeholder:text-body"
+            placeholder="Search..."
+            required
+          />
+
+          <button
+            id="theme-toggle"
+            class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+            aria-label="toggle theme button"
+          >
+            <span id="sun-icon" class="hidden">☀️</span>
+            <span id="moon-icon" class="">🌙</span>
+          </button>
+
+          <el-dropdown class="inline-block">
+            <button
+              id=""
+              class="ml-2 p-[9px] rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              aria-label="user profile"
+            >
+              <span>👤</span>
+            </button>
+
+            <el-menu
+              anchor="bottom end"
+              popover
+              class="m-0 w-56 origin-top-right rounded-md bg-gray-800 p-0 outline outline-1 -outline-offset-1 outline-white/10 transition [--anchor-gap:theme(spacing.2)] [transition-behavior:allow-discrete] data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+            >
+              <div class="py-1">
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:text-white focus:outline-none"
+                  >Account settings</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:text-white focus:outline-none"
+                  >Support</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:text-white focus:outline-none"
+                  >License</a
+                >
+                <form action="#" method="POST">
+                  <button
+                    type="submit"
+                    class="block w-full px-4 py-2 text-left text-sm text-gray-300 focus:bg-white/5 focus:text-white focus:outline-none"
+                  >
+                    Sign out
+                  </button>
+                </form>
+              </div>
+            </el-menu>
+          </el-dropdown>
+        </nav>
+      </header>
+
+      <!-- main section  -->
+      <main class="dark:bg-gray-900">
+        <!-- dashboard data container  -->
+        <div aria-label="dashboard data container" class="p-6">
+          <!-- flex box for dashboard data  -->
+          <div class="flex flex-wrap flex-grow gap-4 justify-center">
+            <div
+              class="border p-5 flex-grow border-gray-400 dark:bg-gray-800 rounded-lg shadow-xl"
+            >
+              <h2
+                class="text-lg font-semibold text-gray-700 dark:text-gray-300"
+              >
+                User
+              </h2>
+              <p
+                class="text-3xl font-semibold text-blue-900 dark:text-blue-700"
+              >
+                1200
+              </p>
+            </div>
+            <div
+              class="border p-5 flex-grow border-gray-400 dark:bg-gray-800 rounded-lg shadow-xl"
+            >
+              <h2
+                class="text-lg font-semibold text-gray-700 dark:text-gray-300"
+              >
+                Revenue
+              </h2>
+              <p class="text-3xl font-semibold text-green-700">10000 $</p>
+            </div>
+            <div
+              class="border p-5 flex-grow border-gray-400 dark:bg-gray-800 rounded-lg shadow-xl"
+            >
+              <h2
+                class="text-lg font-semibold text-gray-700 dark:text-gray-300"
+              >
+                Order
+              </h2>
+              <p class="text-3xl font-semibold text-yellow-600">623</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- dummy chart section  -->
+        <div class="p-5 m-3 border rounded-lg border-gray-400 dark:bg-gray-800">
+          <!-- chart header  -->
+          <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-300">
+            Charts
+          </h2>
+          <!-- horizontal chart  -->
+          <div class="flex justify-around flex-wrap gap-6 pt-4">
+            <!-- single chart container  -->
+            <div
+              class="border-2 shadow-xl p-2 rounded-lg bg-slate-200 dark:bg-slate-50"
+            >
+              <h2
+                class="text-lg font-semibold text-gray-700 dark:text-gray pb-2"
+              >
+                Sales
+              </h2>
+              <div class="flex gap-5 h-[310px] items-end">
+                <div
+                  class="h-24 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+                <div
+                  class="h-48 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+                <div
+                  class="h-32 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+                <div
+                  class="h-64 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+                <div
+                  class="h-40 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+                <div
+                  class="h-20 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+              </div>
+            </div>
+            <!-- single chart container  -->
+            <div
+              class="border-2 shadow-xl p-2 rounded-lg bg-slate-200 dark:bg-slate-50"
+            >
+              <h2
+                class="text-lg font-semibold text-gray-700 dark:text-gray pb-2"
+              >
+                Orders
+              </h2>
+              <div class="flex gap-5 h-[310px] items-end">
+                <div
+                  class="h-52 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+                <div
+                  class="h-28 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+                <div
+                  class="h-9 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+                <div
+                  class="h-32 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+                <div
+                  class="h-40 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+                <div
+                  class="h-64 bg-slate-600 rounded-t-md w-6 md:w-8 lg:w-10"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- revenue chart container  -->
+          <div class="mt-6">
+            <!-- revenue chart container  -->
+            <div class="flex">
+              <!-- revenue chart  -->
+              <div
+                class="border-2 shadow-xl p-2 rounded-lg bg-slate-200 dark:bg-slate-50"
+              >
+                <h2
+                  class="text-lg font-semibold text-gray-700 dark:text-gray pb-2"
+                >
+                  Revenue
+                </h2>
+                <!-- revenue chart dummy divs -->
+                <div class="flex gap-5 h-[310px] flex-col items-start">
+                  <div
+                    class="h-6 sm:h-9 bg-slate-600 rounded-r-lg w-[42vw]"
+                  ></div>
+                  <div
+                    class="h-6 sm:h-9 bg-slate-600 rounded-r-lg w-[50vw] sm:w-[40vw]"
+                  ></div>
+                  <div
+                    class="h-6 sm:h-9 bg-slate-600 rounded-r-lg w-[20vw]"
+                  ></div>
+                  <div
+                    class="h-6 sm:h-9 bg-slate-600 rounded-r-lg w-[70vw] sm:w-[50vw] md:w-[58vw]"
+                  ></div>
+                  <div
+                    class="h-6 sm:h-9 bg-slate-600 rounded-r-lg w-[36vw]"
+                  ></div>
+                  <div
+                    class="h-6 sm:h-9 bg-slate-600 rounded-r-lg w-[47vw]"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      const doc = document.documentElement;
+      // const class=doc.classList.contains
+
+      const btn = document.getElementById("theme-toggle");
+      btn.addEventListener("click", (e) => {
+        if (doc.classList.contains("dark")) {
+          doc.classList.remove("dark");
+          document.getElementById("sun-icon").classList.remove("hidden");
+          document.getElementById("moon-icon").classList.add("hidden");
+        } else {
+          doc.classList.add("dark");
+          document.getElementById("sun-icon").classList.remove("hidden");
+          document.getElementById("moon-icon").classList.add("hidden");
+        }
+      });
+      // console.log("doc", doc);
+    </script>
+  </body>
+</html>
