@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>user dashboard</title>
+    <meta name="description" content="todo list" />
+    <link rel="stylesheet" href="output.css" />
+    <style></style>
+  </head>
+  <body class="bg-gray-900 text-gray-200 min-h-screen p-6">
+    <div
+      class="max-w-xl mx-auto bg-gray-800 shadow-xl rounded-xl p-6 border border-gray-700"
+    >
+      <h2 class="text-3xl font-bold mb-5 text-center text-white">
+        User dashboard
+      </h2>
+
+      <!-- Input Form -->
+      <form action="" id="myForm" class="space-y-4 mb-3">
+        <!-- <div class="grid grid-cols-1 gap-4 mb-4"> -->
+        <input
+          type="text"
+          id="username"
+          placeholder="Name"
+          class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring focus:ring-blue-500 outline-none"
+        />
+        <p class="text-red-500 pl-5" id="nameErr"></p>
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring focus:ring-blue-500 outline-none"
+        />
+        <p class="text-red-500 text-start pl-5" id="emailErr"></p>
+
+        <input
+          type="number"
+          id="age"
+          placeholder="Age"
+          class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring focus:ring-blue-500 outline-none"
+        />
+        <p class="text-red-500 pl-5 text-start" id="ageErr"></p>
+
+        <button
+          class="w-[100%] bg-slate-500 text-white py-3 rounded-lg hover:bg-slate-600 transform transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-xl"
+          type="submit"
+        >
+          Add
+        </button>
+        <!-- </div> -->
+      </form>
+      <span class="text-red-500 pl-5 text-start" id="apiErr"></span>
+      <div class="flex justify-between p-3 mr-4">
+        <div class="space-x-2">
+          <button
+            class="border-b-2 hover:text-gray-300 hover:border-gray-300"
+            id="UserSec"
+          >
+            User
+          </button>
+          <button
+            class="border-b-2 hover:text-gray-300 hover:border-gray-300"
+            id="DomainSec"
+          >
+            Domains
+          </button>
+        </div>
+        <button
+          class="flex justify-center items-center bg-slate-600 hover:bg-slate-500 px-3 rounded-lg py-1"
+          onclick="fetchUser()"
+        >
+          Refresh
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-4 ml-1"
+            id="Refresh-spin"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="max-h-60 overflow-y-scroll">
+        <ul id="data-container" class="space-y-2 p-2 block"></ul>
+        <ul id="Domains-container" class="space-y-2 p-2 hidden">
+          <li>thifdfjdkfj</li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
