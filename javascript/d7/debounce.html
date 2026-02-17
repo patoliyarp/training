@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>debounce</title>
+  </head>
+  <body>
+    <input type="text" id="fname" />
+    <button id="btn" type="submit">submit</button>
+    <div id="container">result</div>
+    <script>
+      const text = document.querySelector("#fname");
+      const btn = document.querySelector("#btn");
+
+      function debounce(fn, delay) {
+        let timeout;
+        console.log("dbn fn", fn);
+        console.log("dbn fn type", typeof fn);
+        return (...args) => {
+          console.log("dbn args", ...args);
+          clearInterval(timeout);
+          timeout = setTimeout(() => fn(...args), delay);
+        };
+      }
+
+      async function searchProduct(name) {
+        try {
+          console.log("api name get", name);
+          const res = await fetch(
+            `https://dummyjson.com/products/search?q=${name}`,
+          );
+          // console.log("res", res);
+          const data = await res.json();
+          console.log("data", data);
+          document.querySelector("#container").textContent = data;
+          return data;
+        } catch (error) {
+          console.log("error while fetch data", error);
+        }
+      }
+
+      const debounceSearch = debounce(searchProduct, 2000);
+
+      text.addEventListener("input", (e) => {
+        console.log("input here", e.target.value);
+        debounceSearch(e.target.value);
+      });
+      const throttle = (func, delay) => {
+        let inThrottle; // A flag to track if a call is already in progress
+        return function (...args) {
+          const context = this;
+          if (!inThrottle) {
+            func.apply(context, args); // Execute the function immediately
+            inThrottle = true;
+            setTimeout(() => {
+              inThrottle = false; // Reset the flag after the delay
+            }, delay);
+          }
+        };
+      };
+      function updateScrollPosition() {
+        console.log("Scroll event handler called");
+        // Perform resource-intensive operations here
+      }
+
+      // Attach the throttled function to the scroll event
+      window.addEventListener("scroll", throttle(updateScrollPosition, 500));
+      // The function will run at most every 500ms
+    </script>
+  </body>
+</html>

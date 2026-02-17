@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>example</title>
+  </head>
+  <body>
+    <div id="mydiv">this is div</div>
+    <div id="pdiv">other parent div</div>
+    <div id="parent">this is major parent</div>
+    <script>
+      const mydiv = document.querySelector("#mydiv");
+      const customUI = document.createElement("ul");
+
+      for (var i = 1; i <= 10; i++) {
+        const newElement = document.createElement("li");
+        newElement.textContent = "This is line " + i;
+        newElement.addEventListener("click", () => {
+          console.log("Responding");
+        });
+        customUI.appendChild(newElement);
+      }
+      mydiv.append(customUI);
+
+      function resFn() {
+        console.log("this is responding fn");
+      }
+      const pdiv = document.querySelector("#pdiv");
+
+      const ul = document.createElement("ul");
+      for (let i = 0; i < 10; i++) {
+        const newli = document.createElement("li");
+        newli.textContent = `this is new li ${i}`;
+        newli.addEventListener("click", resFn);
+        ul.appendChild(newli);
+      }
+      pdiv.append(ul);
+      const parent = document.querySelector("#parent");
+
+      const nul = document.createElement("ul");
+      for (let i = 0; i < 10; i++) {
+        const newli = document.createElement("li");
+        newli.textContent = `this is new li ${i}`;
+        // newli.addEventListener("click", resFn);
+        nul.appendChild(newli);
+      }
+      nul.addEventListener("click", resFn);
+      parent.append(nul);
+    </script>
+  </body>
+</html>

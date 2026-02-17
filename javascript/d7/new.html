@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini E-Commerce App</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800 min-h-screen">
+
+<!-- ================= HEADER ================= -->
+<header class="bg-white sticky top-0 z-50 transition-shadow duration-300">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-indigo-600">MiniStore</h1>
+
+    <div class="flex items-center gap-4">
+      <input id="searchInput"
+        class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+        placeholder="Search products..." />
+
+      <button id="cartBtn"
+        class="relative bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+        Cart
+        <span id="cartCount"
+          class="absolute -top-2 -right-2 bg-red-500 text-xs px-2 py-1 rounded-full">
+          0
+        </span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= PRODUCTS ================= -->
+<div class="max-w-7xl mx-auto px-6 py-10">
+  <div id="productList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</div>
+
+<!-- ================= OVERLAY ================= -->
+<div id="overlay" class="fixed inset-0 bg-black bg-opacity-40 hidden z-40"></div>
+
+<!-- ================= CART DRAWER ================= -->
+<div id="cartDrawer"
+  class="fixed top-0 right-0 h-full w-96 bg-white shadow-xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+
+  <div class="flex justify-between items-center p-5 border-b">
+    <h2 class="text-lg font-semibold">Your Cart</h2>
+    <button id="closeCart" class="text-xl">&times;</button>
+  </div>
+
+  <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-3"></div>
+
+  <div class="border-t p-5">
+    <div class="flex justify-between font-semibold text-lg">
+      <span>Total</span>
+      <span>₹<span id="cartTotal">0</span></span>
+    </div>
+  </div>
+</div>
+
+<script>
+
+/* =========================
+   UTILITIES
+========================= */
+function debounce(fn, delay) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn(...args), delay);
+  };
+}
+
+function throttle(fn, limit) {
+  let waiting = false;
+  return (...args) => {
+    if (!waiting) {
+      fn(...args);
+      waiting = true;
+      setTimeout(() => waiting = false, limit);
+    }
+  };
+}
+
+/* =========================
+   PRODUCT CLASS
+========================= */
+class Product {
+  constructor(id, name, price, stock, image) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.stock = stock;
+    this.image = image;
+  }
+}
+
+/* =========================
+   CART CLASS
+========================= */
+class Cart {
+  constructor() {
+    this.items = new Map();
+    this.uniqueItems = new Set();
+    this.load();
+  }
+
+  add(product) {
+    const currentQty = this.items.get(product.id) ?? 0;
+
+    // Prevent exceeding stock
+    if (currentQty >= product.stock) return;
+
+    this.items.set(product.id, currentQty + 1);
+    this.uniqueItems.add(product.id);
+
+    this.save();
+    renderAll();
+  }
+
+  save() {
+    localStorage.setItem("cart", JSON.stringify([...this.items]));
+  }
+
+  load() {
+    const data = JSON.parse(localStorage.getItem("cart")) ?? [];
+    this.items = new Map(data);
+    this.uniqueItems = new Set(data.map(([id]) => id));
+  }
+
+  getTotal() {
+    let total = 0;
+    this.items.forEach((qty, id) => {
+      const product = products.find(p => p.id == id);
+      total += (product?.price ?? 0) * qty;
+    });
+    return total;
+  }
+
+  getCount() {
+    let count = 0;
+    this.items.forEach(qty => count += qty);
+    return count;
+  }
+}
+
+/* =========================
+   PRODUCTS DATA
+========================= */
+const products = [
+  new Product(1,"MacBook Pro",120000,5,"https://images.unsplash.com/photo-1517336714731-489689fd1ca8"),
+  new Product(2,"iPhone 15",90000,8,"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"),
+  new Product(3,"Sony Headphones",15000,10,"https://images.unsplash.com/photo-1580894908361-967195033215"),
+  new Product(4,"Mechanical Keyboard",8000,7,"https://images.unsplash.com/photo-1519389950473-47ba0277781c"),
+  new Product(5,"Gaming Mouse",3500,12,"https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04")
+];
+
+const cart = new Cart();
+
+/* =========================
+   RENDER PRODUCTS
+========================= */
+function renderProducts(list = products) {
+  const container = document.getElementById("productList");
+  container.innerHTML = "";
+
+  list.forEach(product => {
+
+    const cartQty = cart.items.get(product.id) ?? 0;
+    const availableStock = product.stock - cartQty;
+
+    container.innerHTML += `
+      <div class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+        <img src="${product.image}" class="h-48 w-full object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold text-lg">${product.name}</h3>
+          <p class="text-indigo-600 font-bold mt-1">₹${product.price}</p>
+          <p class="text-sm text-gray-500">
+            ${availableStock > 0 ? `Stock: ${availableStock}` : "Out of Stock"}
+          </p>
+          <button data-id="${product.id}"
+            ${availableStock <= 0 ? "disabled" : ""}
+            class="addBtn mt-4 w-full py-2 rounded-lg transition
+            ${availableStock <= 0
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-indigo-600 text-white hover:bg-indigo-700"}">
+            ${availableStock <= 0 ? "Out of Stock" : "Add to Cart"}
+          </button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+/* =========================
+   RENDER CART
+========================= */
+function renderCart() {
+  const cartDiv = document.getElementById("cartItems");
+  cartDiv.innerHTML = "";
+
+  cart.items.forEach((qty, id) => {
+    const product = products.find(p => p.id == id);
+
+    cartDiv.innerHTML += `
+      <div class="flex justify-between bg-gray-100 p-3 rounded-lg">
+        <div>
+          <p class="font-medium">${product?.name}</p>
+          <p class="text-sm text-gray-500">${qty} x ₹${product?.price}</p>
+        </div>
+        <p class="font-semibold">₹${(product?.price ?? 0) * qty}</p>
+      </div>
+    `;
+  });
+
+  document.getElementById("cartTotal").textContent = cart.getTotal();
+  document.getElementById("cartCount").textContent = cart.getCount();
+}
+
+function renderAll() {
+  renderProducts();
+  renderCart();
+}
+
+/* =========================
+   EVENT DELEGATION
+========================= */
+document.getElementById("productList").addEventListener("click", e => {
+  if (e.target.classList.contains("addBtn")) {
+    const id = parseInt(e.target.dataset.id);
+    const product = products.find(p => p.id === id);
+    cart.add(product);
+  }
+});
+
+/* =========================
+   SEARCH (DEBOUNCED)
+========================= */
+document.getElementById("searchInput")
+  .addEventListener("input",
+    debounce(e => {
+      const value = e.target.value.toLowerCase();
+      const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(value)
+      );
+      renderProducts(filtered);
+    }, 400)
+  );
+
+/* =========================
+   CART DRAWER
+========================= */
+const cartDrawer = document.getElementById("cartDrawer");
+const overlay = document.getElementById("overlay");
+
+document.getElementById("cartBtn").addEventListener("click", () => {
+  cartDrawer.classList.remove("translate-x-full");
+  overlay.classList.remove("hidden");
+});
+
+document.getElementById("closeCart").addEventListener("click", closeCart);
+overlay.addEventListener("click", closeCart);
+
+function closeCart() {
+  cartDrawer.classList.add("translate-x-full");
+  overlay.classList.add("hidden");
+}
+
+/* =========================
+   THROTTLED HEADER SHADOW
+========================= */
+window.addEventListener("scroll", throttle(() => {
+  document.querySelector("header")
+    .classList.toggle("shadow-lg", window.scrollY > 20);
+}, 200));
+
+/* INIT */
+renderAll();
+
+</script>
+
+</body>
+</html>

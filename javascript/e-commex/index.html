@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="output.css" />
+
+    <title>E - Cart</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /* font-family: sam; */
+      }
+    </style>
+  </head>
+  <body class="font-sans">
+    <!-- header section -->
+    <header class="shadow-lg">
+      <div
+        class="flex max-w-7xl py-4 px-4 mx-auto justify-between items-center"
+      >
+        <h1 class="text-2xl font-semibold text-indigo-500">E - Cart</h1>
+
+        <div class="flex gap-4">
+          <div class="search">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search Product..."
+              class="border py-2 px-4 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+            />
+          </div>
+          <button class="relative" id="cart-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-7"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+              />
+            </svg>
+            <p
+              class="absolute top-[-1px] right-[-8px] bg-red-500 text-white rounded-full px-[5px] text-xs text-center"
+            >
+              0
+            </p>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- main section  -->
+
+    <div class="max-w-7xl mx-auto px-6 py-10 " id="main-section">
+      <!-- product card container -->
+      
+    </div>
+
+
+    <!-- drawer component -->
+  <div class="fixed top-0 right-0 h-full w-96 bg-white transform translate-x-full transition-transform duration-300 z-50 flex flex-col " id="drawer" >
+      <div class="flex justify-between items-center p-[22px] shadow-lg border-b">
+      <h2 class="text-lg font-semibold">Your Cart</h2>
+      <button id="closeCart" class="text-2xl">&times;</button>
+  </div>
+
+  <div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-3"></div>
+
+  <div class="border-t p-5">
+    <div class="flex justify-between font-semibold text-lg">
+      <span>Total</span>
+      <span>$<span id="cartTotal">0</span></span>
+    </div>
+    </div>
+
+    <script src="script.js" type="module"></script>
+  </body>
+</html>
