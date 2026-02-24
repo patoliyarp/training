@@ -4,13 +4,16 @@ import { Main } from "./components/Main";
 import UserContextProvider from "./context/UserContext.jsx";
 import { Footer } from "./components/Footer.jsx";
 import { Notfound } from "./components/Notfound.jsx";
+import { Profile } from "./components/Profile.jsx";
 function App() {
   return (
     <>
       <UserContextProvider>
         <Header />
         {/* <Main /> */}
-        <Notfound />
+        {/* <Notfound /> */}
+        <Profile />
+
         <Footer />
       </UserContextProvider>
     </>
