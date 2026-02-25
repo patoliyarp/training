@@ -9,7 +9,7 @@ export function UserCard({
   public_repos,
 }) {
   return (
-    <Link to={`user/${username}`}>
+    <Link to={`profile`}>
       <div className="border border-slate-600 rounded-lg p-4 flex gap-4">
         <div className="w-10 h-10 rounded-full overflow-hidden ">
           <img src={avatar} alt="profile pic" />

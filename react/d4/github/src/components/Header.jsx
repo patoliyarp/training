@@ -1,4 +1,4 @@
-import { Menu, Github, Search } from "lucide-react";
+import { Menu, Github, Search, Moon, Sun } from "lucide-react";
 import { useCallback, useState } from "react";
 import axios from "axios";
 import { useUserContext } from "../context/useUserContext.js";
@@ -82,7 +82,7 @@ export function Header() {
 
   // const handleSearch = debounce(handleChange, 500);
 
-  const { ToggleTheme } = useThemeContext();
+  const { ToggleTheme, theme } = useThemeContext();
 
   return (
     <>
@@ -98,17 +98,16 @@ export function Header() {
               <Github size={22} className="dark:text-white" />
             </Link>
           </div>
-          <h1 className="hidden sm:block text-2x dark:text-white text-[14px] font-medium ">
-            Dashboard
-          </h1>
+          <Link to={"/"}>
+            <h1 className="hidden sm:block text-2x dark:text-white text-[14px] font-medium ">
+              Dashboard
+            </h1>
+          </Link>
         </div>
 
         {/* input and profile section  */}
         <div className="flex justify-center items-center gap-1 sm:gap-6 mr-2.5">
           {/* input section  */}
-          <div className="text-white">
-            <button onClick={ToggleTheme}>toggle</button>
-          </div>
           <div className="relative">
             <input
               value={SearchVal}
@@ -141,6 +140,17 @@ export function Header() {
                 className="h-full w-full "
               />
             </Link>
+          </div>
+          <div className="text-white">
+            <button
+              type="button"
+              class=" flex items-center border-black text-black hover:bg-gray-200 dark:text-white justify-center w-9 h-9 text-xs font-medium  focus:outline-none border dark:border-slate-600 rounded-lg dark:bg-slate-800 dark:hover:bg-slate-700"
+              onClick={ToggleTheme}
+            >
+              {theme.theme == "dark" ? <Sun size={18} /> : <Moon size={18} />}
+
+              <span class="sr-only">Toggle dark/light mode</span>
+            </button>
           </div>
         </div>
         {/* <hr/> */}
