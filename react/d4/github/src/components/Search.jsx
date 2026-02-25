@@ -6,7 +6,7 @@ export function SearchBanner() {
           src="https://github.com/images/modules/search/home-desktop-light.webp"
           alt="Search user"
         />
-        <h1 className="text-center pt-5 text-4xl text-white font-medium pl-4">
+        <h1 className="text-center pt-5 text-4xl dark:text-white font-medium pl-4">
           please search
         </h1>
       </div>
