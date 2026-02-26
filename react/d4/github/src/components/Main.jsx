@@ -5,8 +5,11 @@ import { SearchBanner } from "./Search.jsx";
 import { UserNotfound } from "./UserNotFound.jsx";
 import Loading from "./Loading.jsx";
 
+
 export function Main() {
   const { ResponseUser, error, loading, searchBanner } = useUserContext();
+
+
   return (
     <>
       {/* main hero section  */}
@@ -49,7 +52,9 @@ export function Main() {
         <main className="p-5 sm:p-10 w-full flex bg-white dark:bg-[#0d1117] dark:text-white text-black shadow-sm shadow-slate-700 justify-between h-[80vh] md:h-auto">
           {/* home section  */}
           <div className=" w-full lg:w-[73%]">
-            <h1 className=" dark:text-white font-bold text-xl sm:text-2xl">Home</h1>
+            <h1 className=" dark:text-white font-bold text-xl sm:text-2xl">
+              Home
+            </h1>
 
             {/* display container  */}
             <div className="mt-9">

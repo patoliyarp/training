@@ -3,6 +3,7 @@ export function UserNotfound() {
     <div className="flex justify-center items-center">
       <div className="">
         <img
+        loading="lazy"
           src="https://github.com/images/modules/search/light.png"
           alt="not found pic"
         />

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { userContext } from "./useUserContext.js";
 
+const UserContext = userContext;
+
 export default function UserContextProvider({ children }) {
   // const [userData, setUserdata] = useState([]);
   const [ResponseUser, setResponseUser] = useState([]);
@@ -10,7 +12,7 @@ export default function UserContextProvider({ children }) {
   const [searchBanner, setSearchBanner] = useState(true);
 
   return (
-    <userContext.Provider
+    <UserContext.Provider
       value={{
         ResponseUser,
         setResponseUser,
@@ -23,13 +25,6 @@ export default function UserContextProvider({ children }) {
       }}
     >
       {children}
-    </userContext.Provider>
+    </UserContext.Provider>
   );
 }
-
-// export function useUserContext() {
-//   const context = useContext(userContext);
-//   return context;
-// }
-
-// export { useUserContext };

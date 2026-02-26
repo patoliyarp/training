@@ -1,8 +1,9 @@
 export function SearchBanner() {
   return (
-    <div className="flex h-125 justify-center items-center">
+    <div className="flex h-auto justify-center items-center">
       <div className="">
         <img
+          loading="lazy"
           src="https://github.com/images/modules/search/home-desktop-light.webp"
           alt="Search user"
         />
