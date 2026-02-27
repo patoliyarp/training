@@ -8,10 +8,18 @@ export default function Profile() {
   const { setIsLogin } = useAuthContext();
   const navigate = useNavigate();
 
-  const handleLogout = useCallback(() => {
-    navigate("/");
-    setIsLogin(false);
-  }, [navigate, setIsLogin]);
+  // const handleLogout = useCallback(() => {
+  //   navigate("/");
+  //   setIsLogin(false);
+  // }, [navigate, setIsLogin]);
+
+  const handleLogout = useCallback(
+    function handleLogout() {
+      navigate("/");
+      setIsLogin(false);
+    },
+    [navigate, setIsLogin],
+  );
 
   // function handleLogout() {
   //   navigate("/");

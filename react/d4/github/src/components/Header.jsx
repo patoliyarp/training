@@ -1,90 +1,19 @@
 import { Menu, Github, Search, Moon, Sun } from "lucide-react";
-import { useMemo, useState } from "react";
-import axios from "axios";
+import Input from "./Input.jsx";
 import { useUserContext } from "../context/useUserContext.js";
 import { Link } from "react-router-dom";
 import { useThemeContext } from "../context/ThemeContext.js";
 import { useAuthContext } from "../context/AuthContext.js";
-function debounce(fn, delay) {
-  let timer;
-  return (...arg) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      fn(...arg);
-    }, delay);
-  };
-}
+
 export function Header() {
-  const [SearchVal, setSearchVal] = useState("");
   const {
     ResponseUser,
-    setResponseUser,
-    setError,
-    setSearchBanner,
-    setLoading,
   } = useUserContext();
 
-  async function fetchData(searchQuery) {
-    try {
-      setSearchBanner(false);
-      setLoading(true);
-      if (searchQuery == "") {
-        setSearchBanner(true);
-        setResponseUser([]);
-
-        return;
-      }
-
-      const { data } = await axios.get(
-        `https://api.github.com/users/${searchQuery}`,
-        {
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_GITHUB_KEY}`,
-            Accept: "application/vnd.github.v3+json",
-            "X-GitHub-Api-Version": "2022-11-28",
-          },
-        },
-      );
-
-      setSearchBanner(false);
-      setResponseUser(data);
-
-      setLoading(false);
-      setError(false);
-      console.log("data :>> ", data);
-
-      console.log("ResponseUser :>> ", ResponseUser);
-    } catch (error) {
-      console.log("Error while fetch userdata", error.status);
-      setLoading(false);
-      if (error.status == 404) {
-        setError(true);
-        setResponseUser([]);
-      }
-    }
-  }
-
-  // function handleChange(e) {
-  //   const val = e.target.value;
-  //   setSearchVal(val);
-  //   fetchData(val);
-  // }
-
-  function handleChange(e) {
-    const val = e.target.value;
-    setSearchVal(val);
-    // fetchData(val);
-    debounceChange(val);
-  }
-
-  // eslint-disable-next-line react-hooks/preserve-manual-memoization, react-hooks/exhaustive-deps
-  const debounceChange = useMemo(() => debounce(fetchData, 500), []);
-  
-  // const handleSearch = debounce(handleChange, 500);
   const { ToggleTheme, theme } = useThemeContext();
 
   const { isLogin } = useAuthContext();
-
+  
   return (
     <>
       <header className="h-16 dark:bg-[#0d1117] bg-white shadow-sm shadow-slate-700 dark:shadow-slate-700 flex justify-between items-center p-4">
@@ -109,14 +38,15 @@ export function Header() {
         {/* input and profile section  */}
         <div className="flex justify-center items-center gap-1 sm:gap-6 mr-2.5">
           {/* input section  */}
-          <div className="relative">
+          <Input />
+          {/* <div className="relative">
             <input
               value={SearchVal}
-              onChange={handleChange}
+              onChange={handleInputChange}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  handleChange;
-                  setSearchVal("");
+                  handleInputChange;
+                  // setSearchVal("");
                 }
               }}
               type="text"
@@ -126,7 +56,7 @@ export function Header() {
               size={16}
               className="text-slate-600 absolute top-1.25 left-1.5 font-medium"
             />
-          </div>
+          </div> */}
           {/* Profile image section  */}
           <div className="div">
             {!isLogin ? (

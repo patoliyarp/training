@@ -4,12 +4,12 @@ import { useUserContext } from "../context/useUserContext.js";
 import { SearchBanner } from "./Search.jsx";
 import { UserNotfound } from "./UserNotFound.jsx";
 import Loading from "./Loading.jsx";
-
+import { useState } from "react";
 
 export function Main() {
   const { ResponseUser, error, loading, searchBanner } = useUserContext();
 
-
+  const [val, setVal] = useState("");
   return (
     <>
       {/* main hero section  */}
@@ -26,6 +26,8 @@ export function Main() {
           <div className="relative mt-6">
             <input
               type="text"
+              value={val}
+              onChange={(e) => setVal(e.target.value)}
               className="border w-50 lg:w-50 xl:w-65 focus:border-slate-500 outline-none border-slate-600 rounded-sm ring-slate-800 px-6 dark:text-white font-light "
             />
             <Search

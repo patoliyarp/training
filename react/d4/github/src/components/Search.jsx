@@ -1,4 +1,6 @@
-export function SearchBanner() {
+import { memo } from "react";
+
+export const SearchBanner = memo(function SearchBanner() {
   return (
     <div className="flex h-auto justify-center items-center">
       <div className="">
@@ -13,4 +15,21 @@ export function SearchBanner() {
       </div>
     </div>
   );
-}
+});
+
+// export function SearchBanner() {
+//   return (
+//     <div className="flex h-auto justify-center items-center">
+//       <div className="">
+//         <img
+//           loading="lazy"
+//           src="https://github.com/images/modules/search/home-desktop-light.webp"
+//           alt="Search user"
+//         />
+//         <h1 className="text-center pt-5 text-4xl dark:text-white font-medium pl-4">
+//           please search
+//         </h1>
+//       </div>
+//     </div>
+//   );
+// }
