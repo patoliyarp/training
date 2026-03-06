@@ -12,11 +12,13 @@ import Loading from "./components/Loading.jsx";
 // import { Profile } from "./components/Profile.jsx";
 // import { AccessDenied } from "./components/AccessDenied.jsx";
 // import { Notfound } from "./components/Notfound.jsx";
-
+import ProfileLayout from "./components/ProfileLayout.jsx";
 import { lazy, Suspense } from "react";
-
+import { ReposList } from "./components/ReposList.jsx";
+import { ErrorBoundary } from "react-error-boundary";
+import SuspenseLoading from "./components/SuspenseLoading.jsx";
 const Profile = lazy(() => import("./components/Profile.jsx"));
-const AccessDenied = lazy(() => import("./components/AccessDenied.jsx"));
+// const AccessDenied = lazy(() => import("./components/AccessDenied.jsx"));
 const Notfound = lazy(() => import("./components/Notfound.jsx"));
 
 function App() {
@@ -25,28 +27,34 @@ function App() {
       <Router>
         <UserContextProvider>
           <Header />
-          <Suspense fallback={<Loading />}>
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/notfound" element={<Notfound />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/noaccess" element={<AccessDenied />} />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/notfound" element={<Notfound />} />
+            <Route path="/login" element={<Login />} />
+
+            <Route path="repo" element={<ReposList />} />
+            <Route path="user/:id" element={<User />} />
+            <Route
+              path="profilelayout/:username"
+              element={
+                <ErrorBoundary fallback={<Notfound />}>
+                  <ProfileLayout />
+                </ErrorBoundary>
+              }
+            />
+            {/* protected routes */}
+            <Route element={<ProtectedRoute />}>
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute>
+                  <Suspense fallback={<SuspenseLoading />}>
                     <Profile />
-                  </ProtectedRoute>
+                  </Suspense>
                 }
               />
-              <Route path="user/:id" element={<User />} />
-              {/* <Main /> */}
-              {/* <Notfound /> */}
-              {/* <Profile /> */}
-
-              <Route path="*" element={<Notfound />} />
-            </Routes>
-          </Suspense>
+            </Route>
+            <Route path="*" element={<Notfound />} />
+          </Routes>
           <Footer />
         </UserContextProvider>
       </Router>
