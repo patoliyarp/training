@@ -1,14 +1,15 @@
 import { FolderGit, Search } from "lucide-react";
 import { UserCard } from "./UserCard";
 import Loading from "./Loading.jsx";
-// import { useState } from "react";
 import { useSelector } from "react-redux";
 import NotFound from "./NotFound.jsx";
+import Header from "./Header.jsx";
 export function Main() {
   const { users, loading } = useSelector((state) => state.user);
 
   return (
     <>
+      <Header />
       {/* main hero section  */}
       <div className=" min-h-screen bg-primary text-black ">
         <div className=" max-w-4xl mx-auto">
@@ -22,19 +23,12 @@ export function Main() {
 
               {/* display container  */}
               <div className="mt-9">
-                {/* {searchBanner ? (
-                <SearchBanner />
-              ) :*/}
-                {/* { users.length <= 0 ? (
-                  <NotFound />
-                ) :} */}
                 {loading == "pending" ? (
                   <Loading />
-                ) : loading == "rejected" ? (
+                ) : loading == "rejected" || users.length === 0 ? (
                   <NotFound />
                 ) : (
                   users.map((user) => (
-                    // console.log("user :>> ", user);
                     <UserCard
                       key={user.id}
                       id={user.id}
@@ -48,9 +42,6 @@ export function Main() {
                     />
                   ))
                 )}
-                {/* error ? (
-                <UserNotfound />
-              ) : */}
               </div>
             </div>
           </main>

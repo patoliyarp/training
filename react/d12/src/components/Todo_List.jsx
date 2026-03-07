@@ -26,6 +26,7 @@ export default function Todo_List() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUser());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [filter, setFilter] = useState("all");
@@ -56,14 +57,12 @@ export default function Todo_List() {
       return todos;
     }
     if (filter == "active") {
-      return obj.complete != true;
+      return obj.completed != true;
     }
     if (filter == "completed") {
-      return obj.complete != false;
+      return obj.completed != false;
     }
   });
-
-  function toggleTodo() {}
 
   const completedTodo = todos.filter((obj) => obj.complete);
 
@@ -79,7 +78,6 @@ export default function Todo_List() {
         </div>
         {/* input box  */}
         <div className="flex gap-2 mb-6">
-          {/* onClick={() => addTodo()} */}
           <form action="" className="flex grow" onSubmit={(e) => addTodo(e)}>
             <input
               value={todo}
@@ -130,11 +128,12 @@ export default function Todo_List() {
         <div className="space-y-3 max-h-100 overflow-y-auto">
           {filtered.map((obj) => (
             <TodoCard
-              key={obj.userId}
+              key={uid()}
               obj={obj}
-              // ondelete={dispatch(DeleteUser(obj.userId))}
               ToggleTodo={() => {
-                return dispatch(UpdateUser(obj.userId, !obj.completed));
+                return dispatch(
+                  UpdateUser({ id: obj.userId, completed: !obj.completed }),
+                );
               }}
               ondelete={() => {
                 console.log("obj.userId :>> ", obj.userId);
