@@ -67,13 +67,20 @@ export function Main() {
               ) : error ? (
                 <UserNotfound />
               ) : (
-                <UserCard
-                  avatar={ResponseUser.avatar_url}
-                  username={ResponseUser.login}
-                  followers={ResponseUser.followers}
-                  following={ResponseUser.following}
-                  public_repos={ResponseUser.public_repos}
-                />
+                ResponseUser.length > 0 && (
+
+                  ResponseUser.map((user) => (
+
+
+                    <UserCard
+                      key={user.id}
+                      avatar={user.avatar_url}
+                      username={user.login}
+                      followers={user.followers}
+                      following={user.following}
+                      public_repos={user.public_repos}
+                    />
+                  )))
               )}
               {/* error ? (
                 <UserNotfound />
@@ -82,7 +89,7 @@ export function Main() {
           </div>
 
           {/* right side section of hero  */}
-          <aside className="hidden lg:block border border-slate-700 p-5 rounded-lg dark:text-white w-[20%]">
+          <aside className="hidden h-screen lg:block border border-slate-700 p-5 rounded-lg dark:text-white w-[20%]">
             Radom things
           </aside>
         </main>

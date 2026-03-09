@@ -6,8 +6,8 @@ import { memo } from "react";
 export const UserCard = memo(
   ({ avatar, username, followers, following, public_repos }) => {
     return (
-      <Link to={`/repo/${username}`}>
-        <div className="border border-slate-600 rounded-lg p-4 flex gap-4">
+      <Link to={`/user-profile?username=${username}`}>
+        <div className="border border-slate-600 rounded-lg p-4 flex gap-4 mt-3">
           <div className="w-10 h-10 rounded-full overflow-hidden ">
             <img src={avatar} alt="profile pic" />
           </div>
@@ -16,7 +16,7 @@ export const UserCard = memo(
               {username}
             </h3>
 
-            <div className="flex justify-center items-center gap-12 dark:text-white mt-5">
+            {/* <div className="flex justify-center items-center gap-12 dark:text-white mt-1">
               <div className="flex justify-center items-center">
                 <User size={18} /> {followers}{" "}
                 <span className="dark:text-slate-500">follower</span>
@@ -26,10 +26,10 @@ export const UserCard = memo(
                 <span className="dark:text-slate-500">following</span>
               </div>
             </div>
-            <div className="mt-6 dark:text-white flex items-center gap-2">
+            <div className="mt-1 dark:text-white flex items-center gap-2">
               <FolderGit size={18} /> {public_repos}
               <span className="dark:text-slate-400">public repos</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </Link>

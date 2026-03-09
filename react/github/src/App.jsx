@@ -14,6 +14,7 @@ import { lazy, Suspense } from "react";
 import ReposList from "./components/ReposList.jsx";
 import { ErrorBoundary } from "react-error-boundary";
 import SuspenseLoading from "./components/SuspenseLoading.jsx";
+import UserProfilePage from "./components/UserProfilePage.jsx";
 const Profile = lazy(() => import("./components/Profile.jsx"));
 const Notfound = lazy(() => import("./components/Notfound.jsx"));
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/notfound" element={<Notfound />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/user-profile" element={<UserProfilePage />} />
 
             <Route path="repo" element={<ReposList />} />
 

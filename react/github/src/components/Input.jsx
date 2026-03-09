@@ -35,7 +35,7 @@ export default function Input() {
       }
 
       const { data } = await axios.get(
-        `https://api.github.com/users/${searchQuery}`,
+        `https://api.github.com/search/users?q=${searchQuery}`,
         {
           headers: {
             Authorization: `Bearer ${import.meta.env.VITE_GITHUB_KEY}`,
@@ -46,7 +46,7 @@ export default function Input() {
       );
 
       setSearchBanner(false);
-      setResponseUser(data);
+      setResponseUser(data.items);
 
       setLoading(false);
       setError(false);
