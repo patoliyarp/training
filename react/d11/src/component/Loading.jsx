@@ -1,4 +1,5 @@
-function Loading() {
+import { memo } from "react";
+const Loading = memo(function Loading() {
   return (
     <div className="flex min-h-screen bg-primary justify-center items-center">
       <div
@@ -10,5 +11,6 @@ function Loading() {
       </div>
     </div>
   );
-}
+});
+Loading.displayName = "Loading";
 export default Loading;

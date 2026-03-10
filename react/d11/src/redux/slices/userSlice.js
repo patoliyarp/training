@@ -24,12 +24,17 @@ const initialState = {
   userProfile: [],
   loading: "idle",
   profileLoading: "idle",
+  searchQuery: "",
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchQuery: (state, action) => {
+      state.searchQuery = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchUser.pending, (state) => {
       state.loading = "pending";
@@ -37,11 +42,11 @@ const userSlice = createSlice({
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.loading = "success";
       state.users = action.payload;
-      console.log("action payload of users:->", state.users);
     });
     builder.addCase(fetchUser.rejected, (state) => {
       state.loading = "error";
     });
+
     builder.addCase(fetchUserById.pending, (state) => {
       state.profileLoading = "pending";
     });
@@ -52,11 +57,8 @@ const userSlice = createSlice({
     builder.addCase(fetchUserById.rejected, (state) => {
       state.profileLoading = "error";
     });
-    // builder.addCase(fetchUserById.fulfilled, (state, action) => {
-    //   // state.user.push(action.payload);
-    // });
   },
 });
 
-// export const {}=userSlice.actions
+export const { setSearchQuery } = userSlice.actions;
 export default userSlice.reducer;
