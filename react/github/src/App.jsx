@@ -6,12 +6,9 @@ import UserContextProvider from "./context/UserContext.jsx";
 import { Footer } from "./components/Footer.jsx";
 import { UserNotfound } from "./components/UserNotFound.jsx";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute.jsx";
-import User from "./components/User.jsx";
 import { Login } from "./components/auth/Login.jsx";
 import Loading from "./components/Loading.jsx";
-import ProfileLayout from "./components/ProfileLayout.jsx";
 import { lazy, Suspense } from "react";
-import ReposList from "./components/ReposList.jsx";
 import { ErrorBoundary } from "react-error-boundary";
 import SuspenseLoading from "./components/SuspenseLoading.jsx";
 import UserProfilePage from "./components/UserProfilePage.jsx";
@@ -30,28 +27,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/user-profile" element={<UserProfilePage />} />
 
-            <Route path="repo" element={<ReposList />} />
-
-            <Route
-              path="profilelayout/:username"
-              element={
-                <ErrorBoundary fallback={<Notfound />}>
-                  <ProfileLayout />
-                </ErrorBoundary>
-              }
-            />
+      
             {/* protected routes */}
             <Route element={<ProtectedRoute />}>
-              <Route path="user/:id" element={<User />} />
-              <Route
-                path="repo/:username"
-                element={
-                  <ErrorBoundary fallback={<Notfound />}>
-                    <ReposList />
-                  </ErrorBoundary>
-                }
-              />
-
+            
               <Route
                 path="/profile"
                 element={
