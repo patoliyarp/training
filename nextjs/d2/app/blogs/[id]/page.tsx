@@ -1,5 +1,6 @@
+import CommentSection from "@/app/components/CommentSection";
 import Link from "next/link";
-
+import { getBlogById } from "@/lib/api/blog";
 interface PageProps {
   params: {
     id: string;
@@ -7,9 +8,10 @@ interface PageProps {
 }
 async function PostDetail({ params }: PageProps) {
   const { id } = await params;
-  console.log("id :>> ", id);
-  const data = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-  const post = await data.json();
+  const post = await getBlogById(id);
+  // console.log("id :>> ", id);
+  // const data = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+  // const post = await data.json();
 
   return (
     <div>
@@ -35,6 +37,11 @@ async function PostDetail({ params }: PageProps) {
           </div>
 
           {/* bottom divider */}
+          <hr className="border-primary-100 mt-10 mb-6" />
+
+          {/* comment section  */}
+          <CommentSection />
+
           <hr className="border-primary-100 mt-10 mb-6" />
 
           {/* share row */}

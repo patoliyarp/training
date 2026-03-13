@@ -12,7 +12,10 @@ export default function Header() {
             <Link href={"/"} className="hover:text-white transition-colors">
               Home
             </Link>
-            <Link href={"/blogs"} className="hover:text-white transition-colors">
+            <Link
+              href={"/blogs"}
+              className="hover:text-white transition-colors"
+            >
               Blog
             </Link>
             <Link
@@ -20,6 +23,12 @@ export default function Header() {
               className="hover:text-white transition-colors"
             >
               About
+            </Link>
+            <Link
+              href={"/login"}
+              className="hover:text-white transition-colors"
+            >
+              Login
             </Link>
           </div>
         </div>
