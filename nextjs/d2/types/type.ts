@@ -3,6 +3,8 @@ export type Post = {
   id: string;
   title: string;
   body: string;
+  author?: string;
+  isUserPost?: boolean;
 };
 
 export interface Comment {

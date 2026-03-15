@@ -1,28 +1,64 @@
 import Image from "next/image";
+
 export default function About() {
   return (
-    <>
-      <div className="min-h-screen  text-slate-200 font-sans">
-        <main className="max-w-6xl mx-auto ">
-          <div>
-            <Image
-              src="https://img.freepik.com/free-vector/wave-dark-gradient-background-desogn_343694-4095.jpg?semt=ais_rp_progressive&w=740&q=80"
-              width="500"
-              alt="about page image"
-              height="200"
-              loading="eager"
-              className="opacity-90"
-              style={{ width: "auto", height: "auto" }}
-            />
-          </div>
-          <p className="px-6 pt-20 pb-24 md:pt-32">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim
-            officiis quasi animi aut dolore rerum optio quia illum placeat
-            facilis repellat, velit repellendus commodi consectetur dignissimos
-            cumque ullam reprehenderit. Consequatur?
+    <div className="min-h-screen text-slate-200 font-sans">
+      <main className="max-w-4xl mx-auto px-6 pt-16 pb-24">
+        {/* Hero Image */}
+        <div className="w-full rounded-2xl overflow-hidden mb-10">
+          <Image
+            src="https://img.freepik.com/free-vector/wave-dark-gradient-background-desogn_343694-4095.jpg?semt=ais_rp_progressive&w=740&q=80"
+            width={900}
+            alt="About page banner"
+            height={300}
+            loading="eager"
+            className="w-full h-auto object-cover opacity-90"
+          />
+        </div>
+
+        {/* Content */}
+        <h1 className="text-4xl font-bold text-white mb-6">About BlogApp</h1>
+
+        <div className="space-y-5 text-slate-400 text-base leading-7">
+          <p>
+            Welcome to BlogApp — a simple and clean platform for sharing your
+            thoughts, ideas, and stories with the world. Whether you are a
+            seasoned writer or just getting started, BlogApp gives you the tools
+            to publish and manage your content effortlessly.
           </p>
-        </main>
-      </div>
-    </>
+          <p>
+            This project is built with Next.js as part of a learning journey,
+            exploring features like dynamic routing, API routes, server-side
+            rendering, middleware authentication, and more.
+          </p>
+          <p>
+            We believe in keeping things minimal and focused — great content
+            deserves a distraction-free reading experience.
+          </p>
+        </div>
+
+        {/* Divider */}
+        <hr className="border-primary-100 my-10" />
+
+        {/* Features */}
+        <h2 className="text-2xl font-bold text-white mb-6">What You Can Do</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            { title: "📝 Create Posts", desc: "Write and publish your own blog articles." },
+            { title: "✏️ Edit & Delete", desc: "Full control over your published content." },
+            { title: "🔒 Protected Dashboard", desc: "Only logged-in users can manage posts." },
+            { title: "💬 Comments", desc: "Engage with readers through comments." },
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="bg-primary border border-primary-200 rounded-xl p-5"
+            >
+              <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+              <p className="text-sm text-slate-500">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
   );
 }
