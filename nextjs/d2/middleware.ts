@@ -1,16 +1,33 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+// import { NextResponse } from "next/server";
+// import type { NextRequest } from "next/server";
+
+// export function middleware(request: NextRequest) {
+//   const userSession = request.cookies.get("user_session");
+
+//   if (!userSession) {
+//     const loginUrl = new URL("/login", request.url);
+//     loginUrl.searchParams.set("redirect", request.nextUrl.pathname);
+//     return NextResponse.redirect(loginUrl);
+//   }
+
+//   return NextResponse.next();
+// }
+
+// export const config = {
+//   matcher: ["/dashboard/:path*"],
+// };
+
+import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const userSession = request.cookies.get("user_session");
+  const userEmail = request.cookies.get("user_session")?.value;
+  const { pathname } = request.nextUrl;
 
-  // If no session cookie and trying to access /dashboard, redirect to /login
-  if (!userSession) {
-    const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("redirect", request.nextUrl.pathname);
-    return NextResponse.redirect(loginUrl);
+  if (pathname.startsWith("/dashboard")) {
+    if (!userEmail) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
   }
-
   return NextResponse.next();
 }
 

@@ -4,37 +4,50 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Post } from "@/types/type";
 
-function getUserPosts(email: string): Post[] {
-  if (typeof window === "undefined") return [];
-  const data = localStorage.getItem(`blog_posts_${email}`);
-  return data ? JSON.parse(data) : [];
-}
-
-function deleteUserPost(email: string, postId: string): Post[] {
-  const posts = getUserPosts(email);
-  const updated = posts.filter((p) => p.id !== postId);
-  localStorage.setItem(`blog_posts_${email}`, JSON.stringify(updated));
-  return updated;
-}
-
 export default function DashboardPage() {
   const { user, isAuthenticated } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [deleting, setDeleting] = useState<string | null>(null);
 
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     setPosts(getUserPosts(user.email));
+  //   }
+  // }, [user]);
   useEffect(() => {
-    if (user?.email) {
-      setPosts(getUserPosts(user.email));
+    async function loadPosts() {
+      try {
+        const localUser = await fetch("/api/blog");
+        const localBlog = await localUser.json();
+        const userPosts: Post[] = localBlog.Blog;
+
+        // Merge: user posts first, then API posts
+        setPosts([...userPosts]);
+      } catch {
+        setPosts([]);
+      } finally {
+        // setLoading(false);
+      }
     }
+    loadPosts();
   }, [user]);
 
-  const handleDelete = (postId: string) => {
-    if (!user?.email) return;
-    if (!confirm("Are you sure you want to delete this post?")) return;
-    setDeleting(postId);
-    const updated = deleteUserPost(user.email, postId);
-    setPosts(updated);
-    setDeleting(null);
+  const handleDelete = async (postId: string) => {
+    try {
+      if (!confirm("Are you sure you want to delete this post?")) return;
+
+      const deletedPost = await fetch(`/api/blog/${postId}`, {
+        method: "DELETE",
+      });
+    } catch (error) {
+      throw new Error("error while delete post");
+    }
+    // if (!user?.email) return;
+    // if (!confirm("Are you sure you want to delete this post?")) return;
+    // setDeleting(postId);
+    // const updated = deleteUserPost(user.email, postId);
+    // setPosts(updated);
+    // setDeleting(null);
   };
 
   if (!isAuthenticated) {

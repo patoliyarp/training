@@ -25,6 +25,7 @@ export default function PostForm({
   onSubmit,
   submitLabel = "Publish",
 }: PostFormProps) {
+  
   const formik = useFormik({
     initialValues,
     validationSchema,

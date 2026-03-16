@@ -1,6 +1,7 @@
 import CommentSection from "@/app/components/CommentSection";
 import Link from "next/link";
 import { getBlogById } from "@/lib/api/blog";
+import { number } from "yup";
 interface PageProps {
   params: {
     id: string;
@@ -8,10 +9,15 @@ interface PageProps {
 }
 async function PostDetail({ params }: PageProps) {
   const { id } = await params;
-  const post = await getBlogById(id);
-  // console.log("id :>> ", id);
-  // const data = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-  // const post = await data.json();
+  let post;
+  if (Number(id) <= 100) {
+    post = await getBlogById(id);
+  } else {
+    const data = await fetch(`http://localhost:3000/api/blog/${id}`);
+    console.log("res :>> ", data);
+    const blog = await data.json();
+    post = blog.Blog;
+  }
 
   return (
     <div>

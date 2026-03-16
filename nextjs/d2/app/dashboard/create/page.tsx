@@ -4,30 +4,40 @@ import { useRouter } from "next/navigation";
 import PostForm from "@/app/components/PostForm";
 import Link from "next/link";
 import type { Post } from "@/types/type";
+import { json } from "stream/consumers";
 
 export default function CreatePostPage() {
   const { user } = useAuth();
   const router = useRouter();
 
-  const handleSubmit = (values: { title: string; body: string }) => {
+  const handleSubmit = async (values: { title: string; body: string }) => {
     if (!user?.email) return;
 
-    const storageKey = `blog_posts_${user.email}`;
-    const existing: Post[] = JSON.parse(
-      localStorage.getItem(storageKey) || "[]"
-    );
+    try {
+      const id = Date.now().toString();
+      const newPost: Post = {
+        id,
+        userId: Number(id),
+        title: values.title,
+        body: values.body,
+        author: user.email,
+        isUserPost: true,
+      };
+      const response = await fetch("http://localhost:3000/api/blog", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newPost),
+      });
+      // console.log(response.data);
+    } catch (error) {
+      console.error(error);
+      // setStatus("error");
+    } finally {
+      // setSubmitting(false);
+    }
 
-    const newPost: Post = {
-      id: Date.now().toString(),
-      userId: 0,
-      title: values.title,
-      body: values.body,
-      author: user.email,
-      isUserPost: true,
-    };
-
-    existing.unshift(newPost);
-    localStorage.setItem(storageKey, JSON.stringify(existing));
     router.push("/dashboard");
   };
 
@@ -41,9 +51,7 @@ export default function CreatePostPage() {
           ← Back to Dashboard
         </Link>
 
-        <h1 className="text-3xl font-bold text-white mb-8">
-          Create New Post
-        </h1>
+        <h1 className="text-3xl font-bold text-white mb-8">Create New Post</h1>
 
         <div className="bg-secondary border border-primary-200 rounded-xl p-8">
           <PostForm onSubmit={handleSubmit} submitLabel="Publish Post" />

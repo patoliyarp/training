@@ -15,20 +15,10 @@ export default function BlogsPage() {
       try {
         // Fetch API posts
         const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const localUser = await fetch("/api/blog");
         const apiPosts: Post[] = await res.json();
-
-        // Get user posts from localStorage
-        let userPosts: Post[] = [];
-        if (user?.email) {
-          const data = localStorage.getItem(`blog_posts_${user.email}`);
-          if (data) {
-            userPosts = JSON.parse(data).map((p: Post) => ({
-              ...p,
-              isUserPost: true,
-              id: `user-${p.id}`,
-            }));
-          }
-        }
+        const localBlog = await localUser.json();
+        const userPosts: Post[] = localBlog.Blog;
 
         // Merge: user posts first, then API posts
         setPosts([...userPosts, ...apiPosts]);

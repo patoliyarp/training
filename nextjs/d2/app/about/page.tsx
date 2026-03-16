@@ -36,28 +36,6 @@ export default function About() {
             deserves a distraction-free reading experience.
           </p>
         </div>
-
-        {/* Divider */}
-        <hr className="border-primary-100 my-10" />
-
-        {/* Features */}
-        <h2 className="text-2xl font-bold text-white mb-6">What You Can Do</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {[
-            { title: "📝 Create Posts", desc: "Write and publish your own blog articles." },
-            { title: "✏️ Edit & Delete", desc: "Full control over your published content." },
-            { title: "🔒 Protected Dashboard", desc: "Only logged-in users can manage posts." },
-            { title: "💬 Comments", desc: "Engage with readers through comments." },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="bg-primary border border-primary-200 rounded-xl p-5"
-            >
-              <h3 className="text-white font-semibold mb-1">{item.title}</h3>
-              <p className="text-sm text-slate-500">{item.desc}</p>
-            </div>
-          ))}
-        </div>
       </main>
     </div>
   );

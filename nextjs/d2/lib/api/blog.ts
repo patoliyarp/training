@@ -1,5 +1,5 @@
 import type { Post } from "../../types/type.js";
-
+import { mokeDB } from "@/app/api/blog/modeDB.js";
 const BASE_URL = "https://jsonplaceholder.typicode.com";
 
 export async function getBlog(): Promise<Post[]> {

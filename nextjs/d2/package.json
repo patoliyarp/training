@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "server": "json-server --watch db.json --port 8000"
   },
   "dependencies": {
     "formik": "^2.4.9",
     "js-cookie": "^3.0.5",
+    "json-server": "^1.0.0-beta.13",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
