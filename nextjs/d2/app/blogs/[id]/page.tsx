@@ -1,22 +1,39 @@
 import CommentSection from "@/app/components/CommentSection";
 import Link from "next/link";
-import { getBlogById } from "@/lib/api/blog";
-import { number } from "yup";
+
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
+
 async function PostDetail({ params }: PageProps) {
   const { id } = await params;
+
   let post;
+
   if (Number(id) <= 100) {
-    post = await getBlogById(id);
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, { cache: "no-store" });
+    if (!res.ok) {
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-slate-400">Blog post not found.</p>
+        </div>
+      );
+    }
+    post = await res.json();
   } else {
-    const data = await fetch(`http://localhost:3000/api/blog/${id}`);
-    console.log("res :>> ", data);
-    const blog = await data.json();
-    post = blog.Blog;
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/blog/${id}`, { cache: "no-store" });
+    if (!res.ok) {
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-slate-400">Blog post not found.</p>
+        </div>
+      );
+    }
+    const data = await res.json();
+    post = data.Blog;
   }
 
   return (

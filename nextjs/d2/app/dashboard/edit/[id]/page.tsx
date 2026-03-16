@@ -16,30 +16,49 @@ export default function EditPostPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user?.email) return;
-    const storageKey = `blog_posts_${user.email}`;
-    const posts: Post[] = JSON.parse(
-      localStorage.getItem(storageKey) || "[]"
-    );
-    const found = posts.find((p) => p.id === postId);
-    setPost(found || null);
-    setLoading(false);
-  }, [user, postId]);
+    async function loadPost() {
+      try {
+        const res = await fetch(`/api/blog/${postId}`);
+        if (res.ok) {
+          const data = await res.json();
+          setPost(data.Blog);
+        } else {
+          setPost(null);
+        }
+      } catch {
+        setPost(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadPost();
+  }, [postId]);
 
-  const handleSubmit = (values: { title: string; body: string }) => {
+  const handleSubmit = async (values: { title: string; body: string }) => {
     if (!user?.email || !post) return;
 
-    const storageKey = `blog_posts_${user.email}`;
-    const posts: Post[] = JSON.parse(
-      localStorage.getItem(storageKey) || "[]"
-    );
+    try {
+      const updatedPost = {
+        ...post,
+        title: values.title,
+        body: values.body,
+      };
 
-    const updated = posts.map((p) =>
-      p.id === postId ? { ...p, title: values.title, body: values.body } : p
-    );
+      const res = await fetch(`/api/blog/${postId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedPost),
+      });
 
-    localStorage.setItem(storageKey, JSON.stringify(updated));
-    router.push("/dashboard");
+      if (!res.ok) {
+        throw new Error("Failed to update post");
+      }
+
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Error updating post:", error);
+      alert("Failed to update post. Please try again.");
+    }
   };
 
   if (loading) {

@@ -1,12 +1,6 @@
 {
   "blog": [
     {
-      "userId": 233,
-      "id": "233",
-      "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-      "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-    },
-    {
       "userId": 234,
       "id": "234",
       "title": "qui est esse",
@@ -30,5 +24,6 @@
       "title": "nesciunt quas odio",
       "body": "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

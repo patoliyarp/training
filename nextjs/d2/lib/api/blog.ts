@@ -1,25 +1,21 @@
-import type { Post } from "../../types/type.js";
-import { mokeDB } from "@/app/api/blog/modeDB.js";
-const BASE_URL = "https://jsonplaceholder.typicode.com";
+import type { Post } from "../../types/type";
+
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export async function getBlog(): Promise<Post[]> {
-  //   try {
-  const res = await fetch(`${BASE_URL}/posts`);
+  const res = await fetch(`${BASE_URL}/api/blog`, { cache: "no-store" });
   if (!res.ok) {
-    throw new Error("failed to fetch posts");
+    throw new Error("Failed to fetch posts");
   }
-
-  return res.json();
+  const data = await res.json();
+  return data.Blog;
 }
 
 export async function getBlogById(id: string): Promise<Post> {
-  try {
-    const res = await fetch(`${BASE_URL}/posts/${id}`);
-    if (!res.ok) {
-      throw new Error("failed to fetch posts");
-    }
-    return res.json();
-  } catch (error) {
-    throw new Error("failed to fetch posts");
+  const res = await fetch(`${BASE_URL}/api/blog/${id}`, { cache: "no-store" });
+  if (!res.ok) {
+    throw new Error("Failed to fetch post");
   }
+  const data = await res.json();
+  return data.Blog;
 }

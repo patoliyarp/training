@@ -6,21 +6,20 @@ import { useAuth } from "@/context/AuthProvider";
 import Link from "next/link";
 
 export default function BlogsPage() {
-  const { user, isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadPosts() {
       try {
-        // Fetch API posts
-        const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-        const localUser = await fetch("/api/blog");
-        const apiPosts: Post[] = await res.json();
-        const localBlog = await localUser.json();
-        const userPosts: Post[] = localBlog.Blog;
+        const jsonPlaceholderRes = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const apiPosts: Post[] = await jsonPlaceholderRes.json();
 
-        // Merge: user posts first, then API posts
+        const localRes = await fetch("/api/blog");
+        const localData = await localRes.json();
+        const userPosts: Post[] = localData.Blog || [];
+
         setPosts([...userPosts, ...apiPosts]);
       } catch {
         setPosts([]);
@@ -29,7 +28,7 @@ export default function BlogsPage() {
       }
     }
     loadPosts();
-  }, [user]);
+  }, []);
 
   if (loading) {
     return (
@@ -72,11 +71,7 @@ export default function BlogsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
             <div key={post.id} className="relative">
-              {post.isUserPost && (
-                <span className="absolute top-2 right-2 z-10 bg-btn text-black text-xs font-bold px-2 py-0.5 rounded-full">
-                  Your Post
-                </span>
-              )}
+
               <BlogCard
                 id={post.id}
                 body={post.body}

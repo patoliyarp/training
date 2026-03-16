@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import PostForm from "@/app/components/PostForm";
 import Link from "next/link";
 import type { Post } from "@/types/type";
-import { json } from "stream/consumers";
 
 export default function CreatePostPage() {
   const { user } = useAuth();
@@ -23,22 +22,24 @@ export default function CreatePostPage() {
         author: user.email,
         isUserPost: true,
       };
-      const response = await fetch("http://localhost:3000/api/blog", {
+
+      const response = await fetch("/api/blog", {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(newPost),
       });
-      // console.log(response.data);
-    } catch (error) {
-      console.error(error);
-      // setStatus("error");
-    } finally {
-      // setSubmitting(false);
-    }
 
-    router.push("/dashboard");
+      if (!response.ok) {
+        throw new Error("Failed to create post");
+      }
+
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Error creating post:", error);
+      alert("Failed to create post. Please try again.");
+    }
   };
 
   return (

@@ -1,47 +1,45 @@
 import { NextResponse } from "next/server";
-import { mokeDB } from "./modeDB";
+
+const JSON_SERVER_URL = process.env.JSON_SERVER_URL || "http://localhost:8000";
 
 export async function GET() {
   try {
-    return NextResponse.json({ Blog: mokeDB, success: true }, { status: 200 });
+    const res = await fetch(`${JSON_SERVER_URL}/blog`);
+    if (!res.ok) {
+      throw new Error(`JSON Server responded with status ${res.status}`);
+    }
+    const blogs = await res.json();
+    return NextResponse.json({ Blog: blogs, success: true }, { status: 200 });
   } catch (error) {
-    console.log("error while get blogs:", error);
+    console.error("Error fetching blogs from JSON Server:", error);
     return NextResponse.json(
-      { error: "something went wrong while get data" },
-      { status: 400 },
+      { error: "Failed to fetch blogs" },
+      { status: 500 },
     );
   }
 }
 
 export async function POST(request: Request) {
   try {
-    console.log("request :>> ", request);
     const data = await request.json();
-    // console.log(',);
-    console.log("this is request body ", data);
-    const newItem = {
-      ...data,
-    };
-    mokeDB.push(newItem);
+    const res = await fetch(`${JSON_SERVER_URL}/blog`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      throw new Error(`JSON Server responded with status ${res.status}`);
+    }
+    const created = await res.json();
     return NextResponse.json(
-      {
-        message: "Blog created successfully",
-      },
-      { status: 200 },
+      { message: "Blog created successfully", blog: created },
+      { status: 201 },
     );
   } catch (error) {
-    console.log("error while post blog", error);
+    console.error("Error creating blog:", error);
     return NextResponse.json(
-      { error: "something went wrong while get data" },
-      { status: 400 },
+      { error: "Failed to create blog" },
+      { status: 500 },
     );
   }
 }
-
-// export async function PUT(request: Request) {
-//   try {
-//     const data = await request.json();
-
-//     const blog = mokeDB.find((b) => b.id == data.id);
-//   } catch (error) {}
-// }

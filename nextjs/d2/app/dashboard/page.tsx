@@ -9,45 +9,43 @@ export default function DashboardPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [deleting, setDeleting] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   if (user?.email) {
-  //     setPosts(getUserPosts(user.email));
-  //   }
-  // }, [user]);
   useEffect(() => {
     async function loadPosts() {
       try {
-        const localUser = await fetch("/api/blog");
-        const localBlog = await localUser.json();
-        const userPosts: Post[] = localBlog.Blog;
-
-        // Merge: user posts first, then API posts
-        setPosts([...userPosts]);
+        const res = await fetch("/api/blog");
+        const data = await res.json();
+        if (data.success) {
+          setPosts(data.Blog);
+        } else {
+          setPosts([]);
+        }
       } catch {
         setPosts([]);
-      } finally {
-        // setLoading(false);
       }
     }
     loadPosts();
   }, [user]);
 
   const handleDelete = async (postId: string) => {
-    try {
-      if (!confirm("Are you sure you want to delete this post?")) return;
+    if (!confirm("Are you sure you want to delete this post?")) return;
 
-      const deletedPost = await fetch(`/api/blog/${postId}`, {
+    setDeleting(postId);
+    try {
+      const res = await fetch(`/api/blog/${postId}`, {
         method: "DELETE",
       });
+      if (res.ok) {
+        // Remove the post from state so UI updates immediately
+        setPosts((prev) => prev.filter((p) => p.id !== postId));
+      } else {
+        alert("Failed to delete post. Please try again.");
+      }
     } catch (error) {
-      throw new Error("error while delete post");
+      console.error("Error deleting post:", error);
+      alert("Error deleting post.");
+    } finally {
+      setDeleting(null);
     }
-    // if (!user?.email) return;
-    // if (!confirm("Are you sure you want to delete this post?")) return;
-    // setDeleting(postId);
-    // const updated = deleteUserPost(user.email, postId);
-    // setPosts(updated);
-    // setDeleting(null);
   };
 
   if (!isAuthenticated) {
@@ -101,7 +99,7 @@ export default function DashboardPage() {
                 className="bg-primary border border-primary-200 rounded-xl p-6 flex items-start justify-between gap-4"
               >
                 <div className="flex-1 min-w-0">
-                  <Link href={`/blogs/user-${post.id}`}>
+                  <Link href={`/blogs/${post.id}`}>
                     <h3 className="text-lg font-semibold text-white hover:text-slate-300 transition truncate">
                       {post.title}
                     </h3>
